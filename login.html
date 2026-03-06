@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Github Issue Tracker</title>
+    <title>Login | Github Issue Tracker</title>
 
     <!-- Daisy UI + tailwind -->
     <link
@@ -29,7 +29,7 @@
     </style>
 
     <!-- Font Awesome -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"></script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
   </head>
   <body class="bg-[#F8FAFC] m-auto py-14">
     <div
@@ -57,20 +57,22 @@
             type="text"
             class="input w-full"
             placeholder="Enter Username"
+            id="username"
           />
           <p class="label text-[#4A00FF]">Default: admin</p>
         </fieldset>
         <fieldset class="fieldset">
           <legend class="fieldset-legend">Password</legend>
           <input
-            type="text"
+            type="password"
             class="input w-full"
             placeholder="Enter Password"
+            id="password"
           />
           <p class="label text-[#4A00FF]">Default: admin123</p>
         </fieldset>
       </div>
-      <button class="btn btn-primary w-full">Sign In</button>
+      <button onclick="handleLogin()" class="btn btn-primary w-full">Sign In</button>
       <p class="text-[#1F2937] text-base">OR</p>
       <div class="flex flex-col gap-1.5">
           <p class="text-[#64748B] text-sm">Demo Credentials:</p>
@@ -80,5 +82,6 @@
           </div>
       </div>
     </div>
+    <script src="./login.js"></script>
   </body>
 </html>
