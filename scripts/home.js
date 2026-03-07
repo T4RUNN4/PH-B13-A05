@@ -8,12 +8,14 @@ const displayIssues = (datas, type) => {
   const issueContainer = document.getElementById("issue-container");
   issueContainer.innerHTML = "";
 
+  let issueCount=0;
+
   datas.forEach((data) => {
 
     if((type === "open" && data.status !== "open") || (type === "closed" && data.status !== "closed")) {
         return;
     }
-    
+
     const issueBlock = `
         <div
           class="flex flex-col bg-white rounded-md border-t-4 border-solid border-${data.status === "open" ? "green" : "violet"}-600 p-4 max-w-3xs shadow-xl"
@@ -55,7 +57,10 @@ const displayIssues = (datas, type) => {
         `;
 
     issueContainer.innerHTML += issueBlock;
+    issueCount ++;
   });
+
+  document.getElementById("issue-count").innerText = issueCount;
 };
 
 document.addEventListener("DOMContentLoaded", (e) => {
