@@ -37,7 +37,7 @@
   <body class="bg-[#F8FAFC] min-h-screen">
     <header>
       <div
-        class="navbar flex flex-col md:flex-row justify-between gap-2 bg-base-100 shadow-sm px-10 py-4 bg-white "
+        class="navbar flex flex-col md:flex-row justify-between gap-2 bg-base-100 shadow-sm px-10 py-4 bg-white"
       >
         <div class="flex">
           <img
@@ -53,15 +53,37 @@
             placeholder="Search  issues..."
             class="input input-bordered w-24 md:w-auto"
           />
-          <button class="btn btn-primary">+ New Issue</button>
+          <button class="btn btn-primary">
+            <i class="fa-solid fa-magnifying-glass"></i> Search Issue
+          </button>
         </div>
       </div>
     </header>
     <main class="flex flex-col max-w-6xl mx-auto px-6 mb-3">
-      <div class="flex justify-center md:justify-start gap-3 mt-16 mb-6 p-6 bg-white rounded-md shadow-md">
-        <button id="all-button" onclick="loadIssues('all')" class="btn btn-primary md:w-28">All</button>
-        <button id="open-button" onclick="loadIssues('open')" class="btn md:w-28">Open</button>
-        <button id="closed-button" onclick="loadIssues('closed')" class="btn md:w-28">Closed</button>
+      <div
+        class="flex justify-center md:justify-start gap-3 mt-16 mb-6 p-6 bg-white rounded-md shadow-md"
+      >
+        <button
+          id="all-button"
+          onclick="loadIssues('all')"
+          class="btn btn-primary md:w-28"
+        >
+          All
+        </button>
+        <button
+          id="open-button"
+          onclick="loadIssues('open')"
+          class="btn md:w-28"
+        >
+          Open
+        </button>
+        <button
+          id="closed-button"
+          onclick="loadIssues('closed')"
+          class="btn md:w-28"
+        >
+          Closed
+        </button>
       </div>
       <div
         class="flex flex-col md:flex-row items-center justify-between p-6 bg-white rounded-md shadow-lg gap-4"
@@ -99,8 +121,18 @@
       <div
         id="issue-container"
         class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 p-6 bg-[#FBFBFB] shadow-md hidden"
-      >
-      </div>
+      ></div>
+
+      <dialog id="modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+          <div id="modal-text"></div>
+          <div class="modal-action">
+            <form method="dialog">
+              <button class="btn btn-primary">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </main>
     <script src="./scripts/home.js"></script>
   </body>

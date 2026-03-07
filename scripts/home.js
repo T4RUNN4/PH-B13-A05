@@ -3,22 +3,66 @@ const openTab = document.getElementById("open-button");
 const closedTab = document.getElementById("closed-button");
 
 const issueContainer = document.getElementById("issue-container");
-const spinner = document.getElementById('spinn');
+const spinner = document.getElementById("spinn");
 
 const loading = (isLoading) => {
-    if(isLoading === true) {
-        issueContainer.classList.add("hidden");
-        spinner.classList.remove("hidden");
-    } else {
-        issueContainer.classList.remove("hidden");
-        spinner.classList.add("hidden");
-    }
-}
+  if (isLoading === true) {
+    issueContainer.classList.add("hidden");
+    spinner.classList.remove("hidden");
+  } else {
+    issueContainer.classList.remove("hidden");
+    spinner.classList.add("hidden");
+  }
+};
+
+const loadIssueModal = async (issue) => {
+  const response = await fetch(
+    `https://phi-lab-server.vercel.app/api/v1/lab/issue/${issue}`,
+  );
+  const json = await response.json();
+  const data = json.data;
+
+  const modal = document.getElementById("modal-text");
+  modal.innerHTML = `
+    <h3 class="text-xl font-bold">${data.title}</h3>
+          <div class="flex pt-2 items-center gap-2">
+            <div class="badge badge-soft badge-success">${data.status}</div>
+            <div class="w-1 h-1 bg-[#64748B] rounded-full"> </div>
+            <p class="text-xs text-[#64748B]">Opened by ${data.author}</p>
+            <div class="w-1 h-1 bg-[#64748B] rounded-full"> </div>
+            <p class="text-xs text-[#64748B]">${new Date(data.createdAt).toLocaleDateString()}</p>
+          </div>
+          <div class="flex gap-2 pt-3 pb-2">
+            ${data.labels
+              .map(
+                (label) =>
+                  `<div class="badge badge-soft ${label === "bug" ? "badge-error" : label === "help wanted" ? "badge-warning" : "badge-success"} font-medium">
+                    <span class="mr-1">${label === "bug" ? `<i class="fa-solid fa-bug"style="color: rgb(232, 0, 0)"></i>` : label === "help wanted" ? `<i class="fa-solid fa-handshake-angle" style="color: rgb(252, 152, 0)"></i>` : label === "documentation" ? `<i class="fa-regular fa-clipboard" style="color: rgb(44, 208, 17);"></i>` : label === "good first issue" ? `<i class="fa-solid fa-ranking-star" style="color: rgb(44, 208, 17);"></i>` : `<i class="fa-solid fa-gears" style="color: rgb(44, 208, 17);"></i>`}</span> ${label}
+                </div>`,
+              )
+              .join("")}
+          </div>
+          <p class="text-xs text-[#64748B] pt-4">
+            ${data.description}
+          </p>
+          <div class="grid grid-cols-2 bg-[#F8FAFC] rounded-md mt-4 p-4">
+            <div class="flex flex-col">
+              <p class="text-base text-[#64748B] pb-0.5">Assignee</p>
+              <h4 class="text-base font-semibold">${(data.assignee.length) > 0 ? data.assignee : "Not assigned"}</h4>
+            </div>
+            <div class="flex flex-col">
+              <p class="text-base text-[#64748B] pb-0.5">Priority</p>
+              <div class="badge ${data.priority === "low" ? "badge-primary" : data.priority === "medium" ? "badge-warning" : "badge-error"}">${data.priority.toUpperCase()}</div>
+            </div>
+          </div>`;
+
+  document.getElementById("modal").showModal();
+};
 
 const loadIssues = (type) => {
-    loading(true);
+  loading(true);
 
-    fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
+  fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     .then((response) => response.json())
     .then((json) => displayIssues(json.data, type));
 };
@@ -50,7 +94,7 @@ const displayIssues = (datas, type) => {
 
     const issueBlock = `
         <div
-          class="flex flex-col bg-white rounded-md border-t-4 border-solid border-${data.status === "open" ? "green" : "violet"}-600 p-4 md:max-w-3xs shadow-xl"
+          class="flex flex-col bg-white rounded-md border-t-4 border-solid border-${data.status === "open" ? "green" : "violet"}-600 p-4 md:max-w-3xs shadow-xl cursor-pointer" onclick="loadIssueModal(${data.id})"
         >
           <div class="flex flex-row items-center justify-between">
             <img
