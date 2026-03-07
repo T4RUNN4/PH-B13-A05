@@ -34,7 +34,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     />
   </head>
-  <body class="bg-[#F8FAFC]">
+  <body class="bg-[#F8FAFC] min-h-screen">
     <header>
       <div
         class="navbar flex flex-col md:flex-row justify-between gap-2 bg-base-100 shadow-sm px-10 py-4 bg-white "
@@ -92,9 +92,13 @@
           <p class="md:font-medium">Closed</p>
         </div>
       </div>
+      <div id="spinn" class="flex flex-col items-center justify-center p-6">
+        <span class="loading loading-spinner loading-xl"></span>
+        <p>Data is loading...</p>
+      </div>
       <div
         id="issue-container"
-        class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 p-6 bg-[#FBFBFB] shadow-md"
+        class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 p-6 bg-[#FBFBFB] shadow-md hidden"
       >
       </div>
     </main>

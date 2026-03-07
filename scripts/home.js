@@ -2,21 +2,41 @@ const allTab = document.getElementById("all-button");
 const openTab = document.getElementById("open-button");
 const closedTab = document.getElementById("closed-button");
 
+const issueContainer = document.getElementById("issue-container");
+const spinner = document.getElementById('spinn');
+
+const loading = (isLoading) => {
+    if(isLoading === true) {
+        issueContainer.classList.add("hidden");
+        spinner.classList.remove("hidden");
+    } else {
+        issueContainer.classList.remove("hidden");
+        spinner.classList.add("hidden");
+    }
+}
+
 const loadIssues = (type) => {
-  fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
+    loading(true);
+
+    fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     .then((response) => response.json())
     .then((json) => displayIssues(json.data, type));
 };
 
 const displayIssues = (datas, type) => {
-  const issueContainer = document.getElementById("issue-container");
   issueContainer.innerHTML = "";
-  
+
   allTab.classList.remove("btn-primary");
   openTab.classList.remove("btn-primary");
   closedTab.classList.remove("btn-primary");
 
-  (type === "all") ? allTab.classList.add("btn-primary") : (type === "open") ? openTab.classList.add("btn-primary") : (type === "closed") ? closedTab.classList.add("btn-primary") : "";
+  type === "all"
+    ? allTab.classList.add("btn-primary")
+    : type === "open"
+      ? openTab.classList.add("btn-primary")
+      : type === "closed"
+        ? closedTab.classList.add("btn-primary")
+        : "";
 
   let issueCount = 0;
 
@@ -69,6 +89,7 @@ const displayIssues = (datas, type) => {
     issueCount++;
   });
 
+  loading(false);
   document.getElementById("issue-count").innerText = issueCount;
 };
 
