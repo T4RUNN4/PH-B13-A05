@@ -26,7 +26,7 @@ const loadIssueModal = async (issue) => {
   modal.innerHTML = `
     <h3 class="text-xl font-bold">${data.title}</h3>
           <div class="flex pt-2 items-center gap-2">
-            <div class="badge badge-soft badge-success">${data.status}</div>
+            <div class="badge badge-soft ${data.status === "open" ? "badge-success" : "badge-primary"}">${data.status}</div>
             <div class="w-1 h-1 bg-[#64748B] rounded-full"> </div>
             <p class="text-xs text-[#64748B]">Opened by ${data.author}</p>
             <div class="w-1 h-1 bg-[#64748B] rounded-full"> </div>
@@ -48,7 +48,7 @@ const loadIssueModal = async (issue) => {
           <div class="grid grid-cols-2 bg-[#F8FAFC] rounded-md mt-4 p-4">
             <div class="flex flex-col">
               <p class="text-base text-[#64748B] pb-0.5">Assignee</p>
-              <h4 class="text-base font-semibold">${(data.assignee.length) > 0 ? data.assignee : "Not assigned"}</h4>
+              <h4 class="text-base font-semibold">${data.assignee.length > 0 ? data.assignee : "Not assigned"}</h4>
             </div>
             <div class="flex flex-col">
               <p class="text-base text-[#64748B] pb-0.5">Priority</p>
@@ -57,6 +57,21 @@ const loadIssueModal = async (issue) => {
           </div>`;
 
   document.getElementById("modal").showModal();
+};
+
+const handleSearch = () => {
+  const value = document.getElementById("search-input").value;
+  
+  if(value.length < 1) {
+    alert("Please input a search query");
+    return;
+  }
+
+  loading(true);
+
+  fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${value}`)
+    .then((response) => response.json())
+    .then((json) => displayIssues(json.data, "search"));
 };
 
 const loadIssues = (type) => {
