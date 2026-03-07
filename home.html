@@ -59,9 +59,9 @@
     </header>
     <main class="flex flex-col max-w-6xl mx-auto">
       <div class="flex gap-3 mt-16 mb-6 p-6 bg-white rounded-md shadow-md">
-        <button class="btn btn-primary w-28">All</button>
-        <button class="btn w-28">Open</button>
-        <button class="btn w-28">Closed</button>
+        <button onclick="loadIssues('all')" id="allTab" class="btn btn-primary w-28">All</button>
+        <button onclick="loadIssues('open')" id="openTab" class="btn w-28">Open</button>
+        <button onclick="loadIssues('closed')" id="closedTab" class="btn w-28">Closed</button>
       </div>
       <div
         class="flex items-center justify-between p-6 bg-white rounded-md shadow-lg"
@@ -96,152 +96,6 @@
         id="issue-container"
         class="grid lg:grid-cols-4 gap-4 p-6 bg-[#FBFBFB] shadow-md"
       >
-        <div
-          class="flex flex-col bg-white rounded-md border-t-4 border-solid border-green-600 p-4 max-w-3xs shadow-xl"
-        >
-          <div class="flex flex-row items-center justify-between">
-            <img
-              src="./assets/Open-Status.png"
-              alt="Open Status icon"
-              class="w-6 h-6"
-            />
-            <p
-              class="bg-red-100 text-red-600 p-2 rounded-full font-medium text-xs w-20 text-center"
-            >
-              HIGH
-            </p>
-          </div>
-          <h2 class="font-semibold text-sm pt-3">
-            Fix Navigation Menu On Mobile Devices
-          </h2>
-          <p class="text-xs text-[#64748B] pt-2">
-            The navigation menu doesn't collapse properly on mobile devices...
-          </p>
-          <div class="flex flex-row gap-2 pt-3 pb-2">
-            <p
-              class="bg-red-100 border-1 border-solid border-red-200 text-red-500 p-2 rounded-full font-medium text-xs text-center"
-            >
-              <span class="mr-2"
-                ><i
-                  class="fa-solid fa-bug"
-                  style="color: rgb(232, 0, 0)"
-                ></i></span
-              >Bug
-            </p>
-            <p
-              class="bg-yellow-100 border-1 border-solid border-yellow-200 text-yellow-600 p-2 rounded-full font-medium text-xs text-center"
-            >
-              <span class="mr-2"
-                ><i
-                  class="fa-solid fa-handshake-angle"
-                  style="color: rgb(252, 152, 0)"
-                ></i></span
-              >Help Needed
-            </p>
-          </div>
-          <div
-            class="bg-white rounded-b-md border-t-2 border-solid border-gray-300 p-4 max-w-3xs"
-          >
-            <p class="text-[#64748B] pb-2 text-xs">#1 by John Doe</p>
-            <p class="text-[#64748B] text-xs">15/05/2026</p>
-          </div>
-        </div>
-        <div
-          class="flex flex-col bg-white rounded-md border-t-4 border-solid border-green-600 p-4 max-w-3xs shadow-xl"
-        >
-          <div class="flex flex-row items-center justify-between">
-            <img
-              src="./assets/Open-Status.png"
-              alt="Open Status icon"
-              class="w-6 h-6"
-            />
-            <p
-              class="bg-orange-100 text-orange-600 p-2 rounded-full font-medium text-xs w-20 text-center"
-            >
-              MEDIUM
-            </p>
-          </div>
-          <h2 class="font-semibold text-sm pt-3">
-            Fix Navigation Menu On Mobile Devices
-          </h2>
-          <p class="text-xs text-[#64748B] pt-2">
-            The navigation menu doesn't collapse properly on mobile devices...
-          </p>
-          <div class="flex flex-row gap-2 pt-3 pb-2">
-            <p
-              class="bg-red-100 border-1 border-solid border-red-200 text-red-500 p-2 rounded-full font-medium text-xs text-center"
-            >
-              <span class="mr-2"
-                ><i
-                  class="fa-solid fa-bug"
-                  style="color: rgb(232, 0, 0)"
-                ></i></span
-              >Bug
-            </p>
-            <p
-              class="bg-yellow-100 border-1 border-solid border-yellow-200 text-yellow-600 p-2 rounded-full font-medium text-xs text-center"
-            >
-              <span class="mr-2"
-                ><i
-                  class="fa-solid fa-handshake-angle"
-                  style="color: rgb(252, 152, 0)"
-                ></i></span
-              >Help Needed
-            </p>
-          </div>
-          <div
-            class="bg-white rounded-b-md border-t-2 border-solid border-gray-300 p-4 max-w-3xs"
-          >
-            <p class="text-[#64748B] pb-2 text-xs">#1 by John Doe</p>
-            <p class="text-[#64748B] text-xs">15/05/2026</p>
-          </div>
-        </div>
-        <div
-          class="flex flex-col bg-white rounded-md border-t-4 border-solid border-violet-600 p-4 max-w-3xs shadow-xl"
-        >
-          <div class="flex flex-row items-center justify-between">
-            <img src="./assets/Closed-Status.png" alt="Open Status icon" class="w-6 h-6" />
-            <p
-              class="bg-violet-100 text-violet-600 p-2 rounded-full font-medium text-xs w-20 text-center"
-            >
-              LOW
-            </p>
-          </div>
-          <h2 class="font-semibold text-sm pt-3">
-            Fix Navigation Menu On Mobile Devices
-          </h2>
-          <p class="text-xs text-[#64748B] pt-2">
-            The navigation menu doesn't collapse properly on mobile devices...
-          </p>
-          <div class="flex flex-row gap-2 pt-3 pb-2">
-            <p
-              class="bg-red-100 border-1 border-solid border-red-200 text-red-500 p-2 rounded-full font-medium text-xs text-center"
-            >
-              <span class="mr-2"
-                ><i
-                  class="fa-solid fa-bug"
-                  style="color: rgb(232, 0, 0)"
-                ></i></span
-              >Bug
-            </p>
-            <p
-              class="bg-yellow-100 border-1 border-solid border-yellow-200 text-yellow-600 p-2 rounded-full font-medium text-xs text-center"
-            >
-              <span class="mr-2"
-                ><i
-                  class="fa-solid fa-handshake-angle"
-                  style="color: rgb(252, 152, 0)"
-                ></i></span
-              >Help Needed
-            </p>
-          </div>
-          <div
-            class="bg-white rounded-b-md border-t-2 border-solid border-gray-300 p-4 max-w-3xs"
-          >
-            <p class="text-[#64748B] pb-2 text-xs">#1 by John Doe</p>
-            <p class="text-[#64748B] text-xs">15/05/2026</p>
-          </div>
-        </div>
       </div>
     </main>
     <script src="./scripts/home.js"></script>
