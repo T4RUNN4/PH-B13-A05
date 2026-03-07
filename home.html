@@ -37,7 +37,7 @@
   <body class="bg-[#F8FAFC]">
     <header>
       <div
-        class="navbar flex justify-between bg-base-100 shadow-sm px-10 py-4 bg-white"
+        class="navbar flex flex-col md:flex-row justify-between gap-2 bg-base-100 shadow-sm px-10 py-4 bg-white "
       >
         <div class="flex">
           <img
@@ -57,16 +57,16 @@
         </div>
       </div>
     </header>
-    <main class="flex flex-col max-w-6xl mx-auto">
-      <div class="flex gap-3 mt-16 mb-6 p-6 bg-white rounded-md shadow-md">
-        <button onclick="loadIssues('all')" class="btn btn-primary w-28">All</button>
-        <button onclick="loadIssues('open')" class="btn w-28">Open</button>
-        <button onclick="loadIssues('closed')" class="btn w-28">Closed</button>
+    <main class="flex flex-col max-w-6xl mx-auto px-6 mb-3">
+      <div class="flex justify-center md:justify-start gap-3 mt-16 mb-6 p-6 bg-white rounded-md shadow-md">
+        <button id="all-button" onclick="loadIssues('all')" class="btn btn-primary md:w-28">All</button>
+        <button id="open-button" onclick="loadIssues('open')" class="btn md:w-28">Open</button>
+        <button id="closed-button" onclick="loadIssues('closed')" class="btn md:w-28">Closed</button>
       </div>
       <div
-        class="flex items-center justify-between p-6 bg-white rounded-md shadow-lg"
+        class="flex flex-col md:flex-row items-center justify-between p-6 bg-white rounded-md shadow-lg gap-4"
       >
-        <div class="flex gap-3">
+        <div class="flex items-center justify-center gap-3">
           <div
             class="rounded-full w-11 h-11 bg-[#4A00FF]/10 flex items-center justify-center"
           >
@@ -77,24 +77,24 @@
             />
           </div>
           <div class="flex flex-col">
-            <h2 class="font-semibold text-xl text-[#1F2937]">
-              <span id="issue-count">52</span> Issues
+            <h2 class="font-semibold text-xl md:text-xl text-[#1F2937]">
+              <span id="issue-count">0</span> Issues
             </h2>
-            <p class="text-[#64748B] text-base">
+            <p class="text-[#64748B] text-sm md:text-base">
               Track and Manage your project issues
             </p>
           </div>
         </div>
         <div class="flex flex-row items-center justify-center gap-4">
           <div class="w-3 h-3 rounded-full bg-green-600"></div>
-          <p class="font-medium">Open</p>
+          <p class="md:font-medium">Open</p>
           <div class="w-3 h-3 rounded-full bg-violet-800"></div>
-          <p class="font-medium">Closed</p>
+          <p class="md:font-medium">Closed</p>
         </div>
       </div>
       <div
         id="issue-container"
-        class="grid lg:grid-cols-4 gap-4 p-6 bg-[#FBFBFB] shadow-md"
+        class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 p-6 bg-[#FBFBFB] shadow-md"
       >
       </div>
     </main>
